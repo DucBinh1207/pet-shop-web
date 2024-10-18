@@ -1,8 +1,10 @@
 import Cookies from "js-cookie";
 import axios, { AxiosRequestConfig } from "axios";
+import { ErrorStatus } from "@/constants/error-status";
+import { deleteAuthTokenFromInternalServer } from "./api/login";
 
-const apiClient = axios.create({
-  baseURL: "http://localhost:4444",
+export const apiClient = axios.create({
+  baseURL: "http://localhost:8000",
   headers: {
     "Content-Type": "application/json",
   },
@@ -29,12 +31,24 @@ apiClient.interceptors.response.use(
     return response.data;
   },
   (error) => {
-    // if (error.response.status === 404) {
-    //   window.location.replace("/404");
-    // }
-    console.log(error);
-
-    return Promise.reject(error);
+    if (error.response && error.response.data) {
+      const status = error.response.status;
+      switch (status) {
+        case ErrorStatus.BAD_REQUEST:
+          throw new Error(error.response.data.message);
+        case ErrorStatus.UNAUTHORIZED:
+          deleteAuthTokenFromInternalServer();
+          window.location.href = "/login";
+          throw new Error(error.response.data.message);
+        case ErrorStatus.NOT_FOUND:
+          window.location.href = "/not_found";
+        case ErrorStatus.SERVER_ERROR:
+          window.location.href = "/error";
+      }
+    }
+    if (error.request) {
+      throw new Error("Could not connect");
+    }
   },
 );
 
@@ -48,7 +62,7 @@ export const get = <T>({
   config?: AxiosRequestConfig;
 }): Promise<T> => apiClient.get(url, { url, params, ...config });
 
-export const post = ({
+export const post = <T>({
   url,
   data,
   config,
@@ -56,7 +70,7 @@ export const post = ({
   url: string;
   data: unknown;
   config?: AxiosRequestConfig;
-}) => apiClient.post(url, data, config);
+}): Promise<T> => apiClient.post(url, data, config);
 
 export const update = ({
   url,

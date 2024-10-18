@@ -43,7 +43,6 @@ const inputVariants = cva(
       },
     },
     compoundVariants: [
-      // Biến thể cho trạng thái focus
       {
         variant: "primary",
         class: "focus:outline-none focus:border-primary",
@@ -69,6 +68,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     {
       inputSize,
       variant,
+      type,
       trimOnBlur,
       className: classProps,
       onChange: onChangeProp,
@@ -103,7 +103,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
-      <input ref={ref} className={className} {...rest} onBlur={handleBlur} />
+      <input
+        ref={ref}
+        type={type}
+        className={className}
+        onChange={onChangeProp}
+        {...rest}
+        onBlur={handleBlur}
+      />
     );
   },
 );
