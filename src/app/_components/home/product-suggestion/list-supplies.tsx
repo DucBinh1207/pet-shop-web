@@ -33,7 +33,7 @@ export default function ListSupplies() {
     limit,
   });
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) return <Loading />;
 

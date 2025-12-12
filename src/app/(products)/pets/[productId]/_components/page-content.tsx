@@ -43,7 +43,7 @@ export default function PageContent() {
 
   const { pet, isLoading, isError } = usePetDetail({ id: productId });
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) {
     return <Loading />;

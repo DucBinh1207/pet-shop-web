@@ -38,7 +38,7 @@ export default function PageContent() {
 
   const { supply, isLoading, isError } = useSupplyDetail({ id: productId });
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) {
     return <Loading />;

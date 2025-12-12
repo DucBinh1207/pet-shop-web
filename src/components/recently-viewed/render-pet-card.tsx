@@ -5,7 +5,7 @@ import usePetDetail from "@/hooks/products/usePetDetail";
 export default function RenderPetCard({ productId }: { productId: string }) {
   const { pet, isLoading, isError } = usePetDetail({ id: productId });
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) {
     return <SkeletonCard />;

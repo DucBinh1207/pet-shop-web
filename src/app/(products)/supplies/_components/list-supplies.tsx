@@ -31,7 +31,7 @@ export default function ListSupplies({
       color,
     });
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) {
     return (
