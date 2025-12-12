@@ -13,7 +13,7 @@ export default function OrderDetail() {
 
   const { order, isLoading, isError } = useOrderDetail({ orderId });
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) {
     return <Loading />;

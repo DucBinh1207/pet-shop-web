@@ -24,7 +24,7 @@ export default function Reviews() {
     refresh();
   }
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) {
     return <Loading />;

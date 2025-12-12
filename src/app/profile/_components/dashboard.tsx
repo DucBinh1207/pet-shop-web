@@ -36,7 +36,7 @@ export default function Dashboard({ setTabActive }: props) {
     setOrder(order);
   };
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) {
     return <Loading />;

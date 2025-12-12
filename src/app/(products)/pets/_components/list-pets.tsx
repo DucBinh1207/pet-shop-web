@@ -27,7 +27,7 @@ export default function ListPets({
     price,
   });
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) {
     return (

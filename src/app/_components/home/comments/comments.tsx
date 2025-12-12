@@ -13,7 +13,7 @@ export default function Comments() {
 
   const { reviews, isLoading, isError } = useTopReviews();
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) {
     return <Loading />;

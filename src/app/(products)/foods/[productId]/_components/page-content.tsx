@@ -39,7 +39,7 @@ export default function PageContent() {
 
   const { food, isLoading, isError } = useFoodDetail({ id: productId });
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) {
     return <Loading />;

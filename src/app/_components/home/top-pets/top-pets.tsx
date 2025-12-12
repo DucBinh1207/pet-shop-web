@@ -41,7 +41,7 @@ export default function TopPets() {
     limit,
   });
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) {
     return (

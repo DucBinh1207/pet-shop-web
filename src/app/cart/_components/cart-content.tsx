@@ -86,7 +86,7 @@ export default function CartContent() {
     refresh();
   }, [triggerNumber]);
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) {
     return (

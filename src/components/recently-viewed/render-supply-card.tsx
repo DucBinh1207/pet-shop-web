@@ -5,7 +5,7 @@ import useSupplyDetail from "@/hooks/products/useSupplyDetail";
 export default function RenderSupplyCard({ productId }: { productId: string }) {
   const { supply, isLoading, isError } = useSupplyDetail({ id: productId });
 
-  if (isError) window.location.href = "/error";
+  if (isError) return <></>;
 
   if (isLoading) {
     return <SkeletonCard />;
